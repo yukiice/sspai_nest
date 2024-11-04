@@ -29,11 +29,6 @@ export class PagerDto<T = any> {
   })
   pageSize?: number
 
-  @ApiProperty()
-  @IsString()
-  @IsOptional()
-  field?: string // | keyof T
-
   @ApiProperty({ enum: Order })
   @IsEnum(Order)
   @IsOptional()

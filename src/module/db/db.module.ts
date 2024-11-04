@@ -1,6 +1,9 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { EntityExistConstraint } from "./constraints/entity-exist.constraint";
+import { UserEntity } from "../user/user.entity";
+const providers = [EntityExistConstraint]
 @Module({
   imports: [
     ConfigModule,
@@ -15,11 +18,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           username: configService.get<string>('DB_USERNAME'),
           password: configService.get<string>('DB_PASSWORD'),
           database: configService.get<string>('DB_DATABASE'),
-          entities: [__dirname + '/**/*.entity{.ts,.js}'],
+          entities: [UserEntity],
           // synchronize: true,
         })
       },
     }),
   ],
+  providers,
+  exports:providers
 })
 export class DbModule {}

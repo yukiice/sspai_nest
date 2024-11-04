@@ -1,9 +1,10 @@
-import { BaseEntity, Column } from "typeorm";
+import { BaseEntity, Column, Entity } from "typeorm";
 import { CommonEntity } from "../../common/entity/common.entity";
 import { ApiProperty } from "@nestjs/swagger";
 
-export class UserEntity extends CommonEntity{
 
+@Entity({name:'user'})
+export class UserEntity extends CommonEntity{
   @ApiProperty({description: '用户名'})
   @Column()
   readonly name: string;
