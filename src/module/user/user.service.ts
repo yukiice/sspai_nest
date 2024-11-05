@@ -32,11 +32,15 @@ export class UserService {
     await this.entityManager.transaction(async (manager)=>{
       const u = manager.create(UserEntity, {
         name:userDto.name,
-email:userDto.email,
+        email:userDto.email,
         sex:userDto.sex,
-        avatar:userDto.avatar
+        avatar:userDto.avatar,
+        status:userDto.status,
       })
-      return  await manager.save(u)
+      const savedUser  = await manager.save(u)
+      if (!savedUser )
+        throw new ResultException(ErrorTextEnum.CODE_ERROR)
+      return savedUser
     })
   }
 }
