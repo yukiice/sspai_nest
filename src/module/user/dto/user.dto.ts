@@ -28,7 +28,7 @@ export class UserDto extends CommonDto{
   @ApiProperty({ description: '状态', example: 1 })
   @IsOptional()
   @IsInt()
-  status?: number;
+  status?: number = 1;
 }
 
 export class UpdateUserDto extends PartialType(UserDto){}

@@ -16,7 +16,7 @@ export class UserController{
 
   @Post()
   @ApiOperation({ summary: '新增用户' })
-  async create(@Body() dto: UserDto): Promise<void> {
+  async create(@Body() dto: UpdateUserDto): Promise<void> {
     await this.userService.create(dto)
   }
 }

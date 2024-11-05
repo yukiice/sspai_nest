@@ -7,7 +7,7 @@ export class CommonDto{
     @IsString()
     @MinLength(1)
     @MaxLength(20)
-    id: string;
+    id: number;
 
     @ApiProperty({ description: '创建时间' })
     @IsString()

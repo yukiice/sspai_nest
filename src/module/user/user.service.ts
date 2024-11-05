@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { UserDto, UserQueryDto } from "./dto/user.dto";
+import { UpdateUserDto, UserDto, UserQueryDto } from "./dto/user.dto";
 import { EntityManager, Repository } from "typeorm";
 import { UserEntity } from "./user.entity";
 import { paginate } from "../../helper/paginate";
@@ -25,17 +25,13 @@ export class UserService {
     });
   }
 
-  async create(userDto: UserDto): Promise<void> {
+  async create(userDto: UpdateUserDto): Promise<void> {
     const exists = await this.userRepository.findOne({where:{email:userDto.email}})
     if (exists)
       throw new ResultException(ErrorTextEnum.SYSTEM_USER_EXISTS)
     await this.entityManager.transaction(async (manager)=>{
       const u = manager.create(UserEntity, {
-        name:userDto.name,
-        email:userDto.email,
-        sex:userDto.sex,
-        avatar:userDto.avatar,
-        status:userDto.status,
+        ...userDto
       })
       const savedUser  = await manager.save(u)
       if (!savedUser )
