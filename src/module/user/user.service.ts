@@ -25,7 +25,8 @@ export class UserService {
     });
   }
 
-  async create(userDto: UpdateUserDto): Promise<void> {
+  async register(userDto: UserDto): Promise<void> {
+
     const exists = await this.userRepository.findOne({where:{email:userDto.email}})
     if (exists)
       throw new ResultException(ErrorTextEnum.SYSTEM_USER_EXISTS)

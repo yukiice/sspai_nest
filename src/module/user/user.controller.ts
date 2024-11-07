@@ -14,9 +14,10 @@ export class UserController{
     return this.userService.list(dto)
  }
 
-  @Post()
-  @ApiOperation({ summary: '新增用户' })
-  async create(@Body() dto: UpdateUserDto): Promise<void> {
-    await this.userService.create(dto)
+
+  @Post('register')
+  @ApiOperation({ summary: '用户注册' })
+  async register(@Body() dto: UserDto): Promise<void> {
+    await this.userService.register(dto)
   }
 }
